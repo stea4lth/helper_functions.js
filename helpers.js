@@ -71,3 +71,33 @@ function remove_files_dir_contents($dir) {
     //rmdir( $dir ); // uncomment this to remove $dir too
     return $result;
 }
+
+
+
+
+function deleteDirectory($from_dir) {
+	if (!file_exists($from_dir)) {
+		return true;
+	}
+	if (!is_dir($from_dir)) { // not dir, delete file
+		return unlink($from_dir);
+	}
+	foreach( scandir($from_dir) as $item ){
+		if ($item == '.' || $item == '..'){
+	    		continue;
+		}
+		if (!deleteDirectory($from_dir . DIRECTORY_SEPARATOR . $item)) {
+		    return false;
+		}
+	}
+	return rmdir($from_dir);
+}
+
+
+/*// delete all other files that could have been uploaded
+if($files = scandir($from)){
+	foreach ($files as $file){	// Cycle through all source files
+		if (in_array($file, array(".",".."))) continue;	// skip dot files (. , ..)
+		unlink($file);
+	}
+}*/
