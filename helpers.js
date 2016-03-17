@@ -1,4 +1,9 @@
-
+Array.min = function( array ){
+	return Math.min.apply( Math, array );
+};
+Array.max = function( array ){
+	return Math.max.apply( Math, array );
+};
 // prototypes
 String.prototype.ucFirst = function() {
 	return this.charAt(0).toUpperCase() + this.slice(1);
